@@ -10,6 +10,8 @@ unsigned long lastMoveDownTime = 0;
 unsigned long lastMoveUpTime = 0;
 unsigned long timeToWaitUp = 1500;
 unsigned long timeToWaitDown = 4500;
+unsigned long maxTimeToWaitUp = 20000;
+unsigned long minTimeToWaitUp = 3000;
 
 int fullUpServoPosition = 170;
 int fullDownServoPosition = 40;
@@ -97,7 +99,7 @@ void loop() {
   Serial.println("Servo Pot pin");
   
   Serial.println(potValueServo);
-  potValueServo = map(potValueServo, 0, 1023, 1000, 10000);     // scale it to use it with the servo (value between 1 second to 10 seconds)
+  potValueServo = map(potValueServo, 0, 1023, minTimeToWaitUp, maxTimeToWaitUp);     // scale it to use it with the servo (value between 1 second to 10 seconds)
   timeToWaitUp = potValueServo;
 
   Serial.println("Time to Wait up");
